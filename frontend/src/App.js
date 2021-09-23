@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import { useCallback, useEffect, useState } from 'react';
+import { JsonToTable } from "react-json-to-table";
 
-function App() {
+const url = `${process.env.REACT_APP_ENDPOINT}/amiibo/?name=mario`;
+
+const App = () => {
+  const [data, setData] = useState([]);
+
+  const fetchMyAPI = useCallback(async () => {
+    let response = await fetch(url);
+    response = await response.json();
+    response.amiibo.map((res, key) => res.id = key + 1)
+    setData(response.amiibo);
+  }, [])
+
+  useEffect(() => {
+    fetchMyAPI();
+  }, [fetchMyAPI])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      Acá va el CRUD o tabla que haya que mostrar.
+
+      {data && <JsonToTable json={data} />}
     </div>
   );
 }

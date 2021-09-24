@@ -127,40 +127,32 @@ class ClienteController extends Controller
         "));
         return $clientes;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getCompanyClientsSortByName()
-    {
-        
-        $clientes = DB::select(DB::raw("
-                
-                select empresas.id id_empresa,empresas.name as nom_empresa , concat_ws(' ', clientes.name, clientes.paterno) as nombre,id_cliente,rut from empresas 
-                inner join arriendos  on empresas.id = arriendos.id_empresa
-                inner join clientes   on clientes.id = arriendos.id_cliente order by nom_empresa
-
-        "));
-        $salida_clientes = [];
-        foreach ($clientes as $clave => $cliente) {
-            $salida_clientes[$cliente->nom_empresa][]=$cliente->rut;
-        }
-        
-        return $salida_clientes;
-    }
+    
 
     public function getClientsSortByAmount($id)
     {
         
         $clientes = DB::select(DB::raw("
-            select concat_ws(' ', clientes.name, clientes.paterno) as nombre,  sum(costo_diario * dias) suma 
-            from arriendos inner join clientes on clientes.id = arriendos.id_cliente
-            group by id_cliente,clientes.name order by suma desc
-
+                select id_empresa,rut,sum(costo_diario * dias) montogastado
+                from arriendos 
+                inner join clientes on clientes.id = arriendos.id_cliente
+                inner join empresas  on empresas.id = arriendos.id_empresa
+                where empresas.id = ".$id."
+                group by id_empresa,rut
+                
+                HAVING montogastado > 40000
+                
+                order by id_empresa,montogastado desc,rut
         "));
-        return $clientes;
+        $salida_clientes = [];
+        foreach ($clientes as $clave => $cliente) {
+            $salida_clientes[$cliente->rut] = $cliente->montogastado;
+        }
+        
+        return $salida_clientes;
     }
+
+    
 
 
 }

@@ -25,9 +25,9 @@ Route::delete('/clientes/{id}','App\Http\Controllers\ClienteController@destroy')
 Route::get('/clientes/getClientIds','App\Http\Controllers\ClienteController@getClientIds');
 Route::get('/clientes/getClientSortByLastName','App\Http\Controllers\ClienteController@getClientSortByLastName');
 Route::get('/clientes/getClientsSortByRentExpenses','App\Http\Controllers\ClienteController@getClientsSortByRentExpenses');
-Route::get('/clientes/getCompanyClientsSortByName','App\Http\Controllers\ClienteController@getCompanyClientsSortByName');
+
 Route::get('/clientes/getClientsSortByAmount/{id}','App\Http\Controllers\ClienteController@getClientsSortByAmount');
-Route::get('/clientes/getCompaniesSortByProfits','App\Http\Controllers\ClienteController@getCompaniesSortByProfits');
+
 Route::get('/clientes/getCompaniesWithRentsOver1Week','App\Http\Controllers\ClienteController@getCompaniesWithRentsOver1Week');
 Route::get('/clientes/getClientsWithLessExpense','App\Http\Controllers\ClienteController@getClientsWithLessExpense');
 Route::get('/clientes/newClientRanking','App\Http\Controllers\ClienteController@newClientRanking');
@@ -36,6 +36,9 @@ Route::get('/empresas','App\Http\Controllers\EmpresaController@index');
 Route::post('/empresas','App\Http\Controllers\EmpresaController@store');
 Route::put('/empresas/{id}','App\Http\Controllers\EmpresaController@update');
 Route::delete('/empresas/{id}','App\Http\Controllers\EmpresaController@destroy');
+
+Route::get('/empresas/getCompanyClientsSortByName','App\Http\Controllers\EmpresaController@getCompanyClientsSortByName');
+Route::get('/empresas/getCompaniesSortByProfits','App\Http\Controllers\EmpresaController@getCompaniesSortByProfits');
 
 Route::get('/arriendos','App\Http\Controllers\ArriendoController@index');
 Route::post('/arriendos','App\Http\Controllers\ArriendoController@store');

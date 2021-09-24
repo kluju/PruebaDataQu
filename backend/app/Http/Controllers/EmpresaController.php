@@ -123,4 +123,27 @@ class EmpresaController extends Controller
         "));
         return $clientes;
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getCompaniesWithRentsOver1Week()
+    {
+        
+        $clientes = DB::select(DB::raw("
+                
+                select empresas.id id_empresa,empresas.name as nom_empresa , concat_ws(' ', clientes.name, clientes.paterno) as nombre,id_cliente,rut from empresas 
+                inner join arriendos  on empresas.id = arriendos.id_empresa
+                inner join clientes   on clientes.id = arriendos.id_cliente order by nom_empresa
+
+        "));
+        $salida_clientes = [];
+        foreach ($clientes as $clave => $cliente) {
+            $salida_clientes[$cliente->nom_empresa][]=$cliente->rut;
+        }
+        
+        return $salida_clientes;
+    }
 }

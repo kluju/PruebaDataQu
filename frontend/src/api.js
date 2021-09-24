@@ -1,9 +1,16 @@
 const url = `${process.env.REACT_APP_ENDPOINT}/amiibo/?name=mario`;
+const urlGetClientIds = `${process.env.REACT_APP_ENDPOINT_LARAVEL_CLIENTES}/getClientIds`;
 
 export const getExample = async () => {
   let response = await fetch(url);
   response = await response.json();
   return response.amiibo;
+}
+
+export const getClientIds = async () => {
+  let response = await fetch(urlGetClientIds);
+  response = await response.json();
+  return response;
 }
 
 export const clients = [

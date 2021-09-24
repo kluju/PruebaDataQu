@@ -1,29 +1,16 @@
-import './App.css';
-import { useCallback, useEffect, useState } from 'react';
-import { JsonToTable } from "react-json-to-table";
+import * as React from "react";
+import { Admin, Resource } from 'react-admin';
+import restProvider from 'ra-data-simple-rest';
+import { data } from './api';
 
-const url = `${process.env.REACT_APP_ENDPOINT}/amiibo/?name=mario`;
+import { PostList, PostEdit, PostCreate, PostIcon } from './posts';
 
-const App = () => {
-  const [data, setData] = useState([]);
-
-  const fetchMyAPI = useCallback(async () => {
-    let response = await fetch(url);
-    response = await response.json();
-    response.amiibo.map((res, key) => res.id = key + 1)
-    setData(response.amiibo);
-  }, [])
-
-  useEffect(() => {
-    fetchMyAPI();
-  }, [fetchMyAPI])
-
+function App() {
+  const apiUrl = data; // 'http://localhost:3000'
   return (
-    <div className="App">
-      Acá va el CRUD o tabla que haya que mostrar.
-
-      {data && <JsonToTable json={data} />}
-    </div>
+    <Admin dataProvider={restProvider(apiUrl)}>
+      <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon}/>
+    </Admin>
   );
 }
 

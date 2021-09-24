@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
 {
@@ -83,4 +84,83 @@ class ClienteController extends Controller
         $cliente = Cliente::destroy($request->id);
         return $cliente;
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getClientIds()
+    {
+        
+        $clientes = Cliente::select('id')->get();
+        return $clientes;
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getClientSortByLastName()
+    {
+        
+        $clientes = DB::select(DB::raw("
+                select id_cliente from clientes 
+                inner join arriendos  on clientes.id = arriendos.id_cliente order by clientes.name
+
+        "));
+        return $clientes;
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getClientsSortByRentExpenses()
+    {
+        
+        $clientes = DB::select(DB::raw("
+            select concat_ws(' ', clientes.name, clientes.paterno) as nombre,  sum(costo_diario * dias) suma 
+            from arriendos inner join clientes on clientes.id = arriendos.id_cliente
+            group by id_cliente,clientes.name order by suma desc
+
+        "));
+        return $clientes;
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getCompanyClientsSortByName()
+    {
+        
+        $clientes = DB::select(DB::raw("
+                
+                select empresas.id id_empresa,empresas.name as nom_empresa , concat_ws(' ', clientes.name, clientes.paterno) as nombre,id_cliente,rut from empresas 
+                inner join arriendos  on empresas.id = arriendos.id_empresa
+                inner join clientes   on clientes.id = arriendos.id_cliente order by nom_empresa
+
+        "));
+        $salida_clientes = [];
+        foreach ($clientes as $clave => $cliente) {
+            $salida_clientes[$cliente->nom_empresa][]=$cliente->rut;
+        }
+        
+        return $salida_clientes;
+    }
+
+    public function getClientsSortByAmount($id)
+    {
+        
+        $clientes = DB::select(DB::raw("
+            select concat_ws(' ', clientes.name, clientes.paterno) as nombre,  sum(costo_diario * dias) suma 
+            from arriendos inner join clientes on clientes.id = arriendos.id_cliente
+            group by id_cliente,clientes.name order by suma desc
+
+        "));
+        return $clientes;
+    }
+
+
 }

@@ -22,7 +22,7 @@ Route::post('/clientes','App\Http\Controllers\ClienteController@store');
 Route::put('/clientes/{id}','App\Http\Controllers\ClienteController@update');
 Route::delete('/clientes/{id}','App\Http\Controllers\ClienteController@destroy');
 
-clRoute::get('/clientes/getClientIds','App\Http\Controllers\ClienteController@getClientIds');
+Route::get('/clientes/getClientIds','App\Http\Controllers\ClienteController@getClientIds');
 Route::get('/clientes/getClientSortByLastName','App\Http\Controllers\ClienteController@getClientSortByLastName');
 Route::get('/clientes/getClientsSortByRentExpenses','App\Http\Controllers\ClienteController@getClientsSortByRentExpenses');
 Route::get('/clientes/getCompanyClientsSortByName','App\Http\Controllers\ClienteController@getCompanyClientsSortByName');

@@ -17,6 +17,7 @@ class CreateClientesTable extends Migration
             $table->id();
             $table->string('rut');
             $table->string('name');
+            $table->string('paterno');
             $table->timestamps();
         });
     }

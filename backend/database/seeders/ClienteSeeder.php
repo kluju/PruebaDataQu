@@ -31,60 +31,71 @@ class ClienteSeeder extends Seeder
                 'id' => 1,
                 'rut' => '18620855-1',
                 'name' => 'Angel Serrano',
+                'paterno' => 'Serrano',
             ),
             1 => 
             array (
                 'id' => 2,
                 'rut' => '11345435-2',
-                'name' => 'Roser Abreu',
+                'name' => 'Rose',
+                'paterno' => 'Abreu',
             ),
             2 => 
             array (
                 'id' => 3,
                 'rut' => '14256777-k',
-                'name' => 'Rosa Campos',
+                'name' => 'Rosa',
+                'paterno' => 'Campos',
             ),
             3 => 
             array (
                 'id' => 4,
                 'rut' => '12675688-0',
-                'name' => 'Celestino Fuentes',
+                'name' => 'Celestino',
+                'paterno' => 'Fuentes',
             ),
             4 => 
             array (
                 'id' => 5,
                 'rut' => '14234334-4',
-                'name' => 'Rebeca Rojas',
+                'name' => 'Rebeca',
+                'paterno' => 'Rojas',
             ),
             5 => 
             array (
                 'id' => 6,
                 'rut' => '10152323-8',
-                'name' => 'Andrea Palomo',
+                'name' => 'Andrea',
+                'paterno' => 'Palomo',
             ),
             6 => 
             array (
                 'id' => 7,
                 'rut' => '15587715-4',
-                'name' => 'Maria Inmaculada Jiménez',
+                'name' => 'Maria',
+                'paterno' => 'Inmaculada',
+                
             ),
             7 => 
             array (
                 'id' => 8,
                 'rut' => '15034590-7',
-                'name' => 'Marcela Navarro',
+                'name' => 'Marcela',
+                'paterno' => 'Navarro',
             ),
             8 => 
             array (
                 'id' => 9,
                 'rut' => '11804345-3',
-                'name' => 'Francisco Manuel Gago',
+                'name' => 'Francisco Manuel',
+                'paterno' => 'Gago',
             ),
             9 => 
             array (
                 'id' => 10,
                 'rut' => '13804238-0',
-                'name' => 'Patricio Duran',
+                'name' => 'Patricio',
+                'paterno' => 'Duran',
             ),
         ));
 

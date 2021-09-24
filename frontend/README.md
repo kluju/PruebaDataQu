@@ -1,11 +1,3 @@
-# Prueba DataQu
-
-- Descripción del front, y agregar instrucciones de instalación.
-
-yarn start
-
-- Recordar que los endpoints van en un archivo .env que dejaremos en el repositorio
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

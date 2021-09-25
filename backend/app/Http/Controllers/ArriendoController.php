@@ -15,8 +15,11 @@ class ArriendoController extends Controller
      */
     public function index()
     {
-        $arriendos = Arriendo::all();
-        return $arriendos;
+        $salida = DB::select(DB::raw(
+            "select arriendos.id,id_empresa,empresas.name as empresa,id_cliente,clientes.name as nombre,clientes.paterno, costo_diario, dias from arriendos inner join clientes on clientes.id = arriendos.id_cliente inner join empresas  on empresas.id = arriendos.id_empresa")
+        );
+       
+        return $salida;
     }
 
     

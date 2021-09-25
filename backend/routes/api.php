@@ -18,8 +18,9 @@ use Illuminate\Http\Request;
 //});
 
 Route::get('/clientes','App\Http\Controllers\ClienteController@index');
+Route::get('/clientes/getClientById/{id}','App\Http\Controllers\ClienteController@getClientById');
 Route::post('/clientes','App\Http\Controllers\ClienteController@store');
-Route::put('/clientes/{id}','App\Http\Controllers\ClienteController@update');
+Route::post('/clientes/update/{id}','App\Http\Controllers\ClienteController@update');
 Route::delete('/clientes/{id}','App\Http\Controllers\ClienteController@destroy');
 
 Route::get('/clientes/getClientIds','App\Http\Controllers\ClienteController@getClientIds');
@@ -27,7 +28,6 @@ Route::get('/clientes/getClientSortByLastName','App\Http\Controllers\ClienteCont
 Route::get('/clientes/getClientsSortByRentExpenses','App\Http\Controllers\ClienteController@getClientsSortByRentExpenses');
 
 Route::get('/clientes/getClientsSortByAmount/{id}','App\Http\Controllers\ClienteController@getClientsSortByAmount');
-Route::get('/clientes/getClientsWithLessExpense','App\Http\Controllers\ClienteController@getClientsWithLessExpense');
 Route::get('/clientes/newClientRanking','App\Http\Controllers\ClienteController@newClientRanking');
 
 Route::get('/empresas','App\Http\Controllers\EmpresaController@index');
@@ -38,6 +38,7 @@ Route::delete('/empresas/{id}','App\Http\Controllers\EmpresaController@destroy')
 Route::get('/empresas/getCompanyClientsSortByName','App\Http\Controllers\EmpresaController@getCompanyClientsSortByName');
 Route::get('/empresas/getCompaniesSortByProfits','App\Http\Controllers\EmpresaController@getCompaniesSortByProfits');
 Route::get('/empresas/getCompaniesWithRentsOver1Week','App\Http\Controllers\EmpresaController@getCompaniesWithRentsOver1Week');
+Route::get('/empresas/getClientsWithLessExpense','App\Http\Controllers\EmpresaController@getClientsWithLessExpense');
 
 Route::get('/arriendos','App\Http\Controllers\ArriendoController@index');
 Route::post('/arriendos','App\Http\Controllers\ArriendoController@store');

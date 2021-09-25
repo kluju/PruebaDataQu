@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use App\Models\Arriendo;
 use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
@@ -19,6 +20,17 @@ class ClienteController extends Controller
         return $clientes;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getClientById(Request $request)
+    {
+        $cliente = Cliente::findOrFail($request->id);
+        return $cliente;
+    }
+
     
     /**
      * Store a newly created resource in storage.
@@ -31,8 +43,14 @@ class ClienteController extends Controller
         $cliente = new Cliente();
         $cliente->rut = $request->rut;
         $cliente->name = $request->name;
-        $cliente->save();
+        $cliente->paterno = $request->paterno;
+        if($cliente->save()){
+            $salida = array("code"=>"200","mensaje"=>"Guardado satisfactoriamente");
+        }else{
+            $salida = array("code"=>"300","mensaje"=>"No se pudo guardar");
+        }
         
+        return $salida;
     }
 
     /**
@@ -66,10 +84,12 @@ class ClienteController extends Controller
      */
     public function update(Request $request)
     {
+        
         $cliente = Cliente::findOrFail($request->id);
         $cliente->rut = $request->rut;
         $cliente->name = $request->name;
-        $cliente->save();
+        $cliente->paterno = $request->paterno;
+        $cliente->update();
         return $cliente;
     }
 
@@ -82,7 +102,7 @@ class ClienteController extends Controller
     public function destroy(Request $request)
     {
         $cliente = Cliente::destroy($request->id);
-        return $cliente;
+        return $this->index();
     }
 
     /**
@@ -152,7 +172,28 @@ class ClienteController extends Controller
         return $salida_clientes;
     }
 
-    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function newClientRanking()
+    {
+        
+        $cliente = new Cliente();
+        $cliente->rut = "11111111-1";
+        $cliente->name = "Danilo";
+        $cliente->paterno = "Fuenzalida";
+        $cliente->save();
+        
+        $arriendo = new Arriendo();
+        $arriendo->id_cliente = $cliente->id;
+        $arriendo->id_empresa = 2;
+        $arriendo->costo_diario = 20000;
+        $arriendo->dias = 30;
+        $arriendo->save();
+        return $this->getClientsSortByAmount(2);
+    }
 
 
 }

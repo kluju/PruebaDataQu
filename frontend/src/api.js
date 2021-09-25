@@ -1,5 +1,18 @@
 const url = `${process.env.REACT_APP_ENDPOINT}/amiibo/?name=mario`;
-const urlGetClientIds = `${process.env.REACT_APP_ENDPOINT_LARAVEL_CLIENTES}/getClientIds`;
+
+const urlGetClients = `${process.env.REACT_APP_ENDPOINT_LARAVEL_CLIENTES}`;
+const urlGetBusiness = `${process.env.REACT_APP_ENDPOINT_LARAVEL_EMPRESAS}`;
+const urlGetLeases = `${process.env.REACT_APP_ENDPOINT_LARAVEL_ARRIENDOS}`;
+
+
+const getHeader = ()=>{
+  let header = { };
+  header["Content-Type"] = "application/json";
+  //if(Cookies.get("access_token"))
+      //header["Authorization"] = "Bearer "+Cookies.get("access_token");
+
+  return header;
+}
 
 export const getExample = async () => {
   let response = await fetch(url);
@@ -8,7 +21,69 @@ export const getExample = async () => {
 }
 
 export const getClientIds = async () => {
-  let response = await fetch(urlGetClientIds);
+  let response = await fetch(urlGetClients);
+  response = await response.json();
+  return response;
+}
+
+export const getClients = async () => {
+  let response = await fetch(urlGetClients);
+  response = await response.json();
+  return response;
+}
+export const getClientById = async (id) => {
+  let response = await fetch(urlGetClients+"/getClientById/"+id);
+  response = await response.json();
+  return response;
+}
+
+export const saveClients = async (user) => {
+  let formData = new FormData();
+  formData.append("name",user.name);
+  formData.append("paterno",user.paterno);
+  formData.append("rut",user.rut);
+  var options = {
+    method: 'POST',
+    body: formData,
+    redirect: 'follow'
+  };
+  let response = await fetch(urlGetClients, options );
+  return response;
+}
+
+export const updateClients = async (user) => {
+  let formData = new FormData();
+  
+  formData.append("name",user.name);
+  formData.append("paterno",user.paterno);
+  formData.append("rut",user.rut);
+  var options = {
+    method: 'POST',
+    body: formData,
+    redirect: 'follow'
+  };
+  let response = await fetch(urlGetClients+"/update/"+user.id, options );
+  return response;
+}
+export const deleteClient = async (id) => {
+  var options = {
+    method: 'DELETE',
+    redirect: 'follow'
+  };
+  
+  let response = await fetch(urlGetClients+"/"+id,{headers:getHeader(),method: 'DELETE'  });
+  response = await response.json();
+  return response;
+}
+
+export const getBusiness = async () => {
+  let response = await fetch(urlGetBusiness);
+  response = await response.json();
+  return response;
+}
+
+export const getLeases = async () => {
+  let response = await fetch(urlGetLeases);
   response = await response.json();
   return response;
 }

@@ -31,8 +31,9 @@ Route::get('/clientes/getClientsSortByAmount/{id}','App\Http\Controllers\Cliente
 Route::get('/clientes/newClientRanking','App\Http\Controllers\ClienteController@newClientRanking');
 
 Route::get('/empresas','App\Http\Controllers\EmpresaController@index');
+Route::get('/empresas/getBusinessById/{id}','App\Http\Controllers\EmpresaController@getBusinessById');
 Route::post('/empresas','App\Http\Controllers\EmpresaController@store');
-Route::put('/empresas/{id}','App\Http\Controllers\EmpresaController@update');
+Route::post('/empresas/update/{id}','App\Http\Controllers\EmpresaController@update');
 Route::delete('/empresas/{id}','App\Http\Controllers\EmpresaController@destroy');
 
 Route::get('/empresas/getCompanyClientsSortByName','App\Http\Controllers\EmpresaController@getCompanyClientsSortByName');
@@ -42,9 +43,11 @@ Route::get('/empresas/getClientsWithLessExpense','App\Http\Controllers\EmpresaCo
 
 Route::get('/arriendos','App\Http\Controllers\ArriendoController@index');
 Route::post('/arriendos','App\Http\Controllers\ArriendoController@store');
-Route::put('/arriendos/{id}','App\Http\Controllers\ArriendoController@update');
+Route::post('/arriendos/update/{id}','App\Http\Controllers\ArriendoController@update');
 Route::delete('/arriendos/{id}','App\Http\Controllers\ArriendoController@destroy');
 Route::get('/arriendos/pormes','App\Http\Controllers\ArriendoController@arriendoPorMes');
+Route::get('/arriendos/getLeasesById/{id}','App\Http\Controllers\ArriendoController@getLeasesById');
+
 Route::get('/arriendos/mayormonto','App\Http\Controllers\ArriendoController@arriendoMayorMonto');
 Route::get('/arriendos/menormonto','App\Http\Controllers\ArriendoController@arriendoMenorMonto');
 

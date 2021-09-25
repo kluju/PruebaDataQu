@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Database\Seeders\Traits\DisableForeignKeys;
+use Carbon\Carbon;
 
 /**
  * Class ClienteSeeder.
@@ -72,8 +73,8 @@ class ClienteSeeder extends Seeder
             array (
                 'id' => 7,
                 'rut' => '15587715-4',
-                'name' => 'Maria',
-                'paterno' => 'Inmaculada',
+                'name' => 'Maria Inmaculada',
+                'paterno' => 'Jiménez',
                 
             ),
             7 => 

@@ -23,6 +23,7 @@ export const Clientes = () => {
               <thead>
                   <tr>
                       <th>Id</th>
+                      <th>Rut</th>
                       <th>Nombre</th>
                       <th>Paterno</th>
                       <th clospan="2"/>
@@ -32,6 +33,7 @@ export const Clientes = () => {
                   {clients.map((e, i) => (
                       <tr key={e.id}>
                           <td>{e.id}</td>
+                          <td>{e.rut}</td>
                           <td>{e.name}</td>
                           <td>{e.paterno}</td>
                           <td>

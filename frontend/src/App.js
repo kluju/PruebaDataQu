@@ -12,8 +12,10 @@ import {
   Link
 } from "react-router-dom";
 import {Clientes,ClientesADD, ClientesUPDATE}from './Views/Clientes';
-import Empresas from './Views/Empresas';
-import Arriendos from './Views/Arriendos';
+import {Empresas,EmpresasADD, EmpresasUPDATE} from './Views/Empresas';
+import {Arriendos,ArriendosADD, ArriendosUPDATE} from './Views/Arriendos';
+
+import  {GetClientIds,GetClientSortByLastName,GetClientsSortByRentExpenses,GetCompanyClientsSortByName,GetClientsSortByAmount,GetCompaniesSortByProfits,GetCompaniesWithRentsOver1Week,GetClientsWithLessExpense,NewClientRanking } from './Views/Funciones';
 
 const App = () => {
   
@@ -31,7 +33,17 @@ const App = () => {
                 <Link className="p-2 text-dark" to="/">Clientes</Link>
                 <Link className="p-2 text-dark" to="/empresas">Empresas</Link>
                 <Link className="p-2 text-dark" to="/arriendos">Arriendos</Link>
+                <Link className="p-2 text-dark" to="/clientes/getClientIds">ClientIds</Link>
+                <Link className="p-2 text-dark" to="/clientes/getClientSortByLastName">ClientSortByLastName</Link>
+                <Link className="p-2 text-dark" to="/clientes/getClientsSortByRentExpenses">ClientsSortByRentExpenses</Link>
+                <Link className="p-2 text-dark" to="/empresas/getCompanyClientsSortByName">CompanyClientsSortByName</Link>
+                <Link className="p-2 text-dark" to="/empresas/getClientsSortByAmount">ClientsSortByAmount</Link>
+                <Link className="p-2 text-dark" to="/empresas/getCompaniesSortByProfits">CompaniesSortByProfits</Link>
+                <Link className="p-2 text-dark" to="/empresas/getCompaniesWithRentsOver1Week">CompaniesWithRentsOver1Week</Link>
+                <Link className="p-2 text-dark" to="/empresas/getClientsWithLessExpense">ClientsWithLessExpense</Link>
+                <Link className="p-2 text-dark" to="/clientes/newClientRanking">NewClientRanking</Link>
               </nav>
+              
             </div>
             <Switch>
             <Route exact path="/">
@@ -41,12 +53,30 @@ const App = () => {
               <ClientesADD />
             </Route>
             <Route exact path="/clientes/update/:id" component={ClientesUPDATE}/>
-            <Route path="/empresas">
+            
+            <Route exact path="/empresas">
               <Empresas />
             </Route>
-            <Route path="/arriendos">
+            <Route exact path="/empresas/create">
+              <EmpresasADD />
+            </Route>
+            <Route exact path="/empresas/update/:id" component={EmpresasUPDATE}/>
+            <Route exact path="/arriendos">
               <Arriendos />
             </Route>
+            <Route exact path="/arriendos/create">
+              <ArriendosADD />
+            </Route>
+            <Route exact path="/arriendos/update/:id" component={ArriendosUPDATE}/>
+            <Route exact path="/clientes/getClientIds" component={GetClientIds}/>
+            <Route exact path="/clientes/getClientSortByLastName" component={GetClientSortByLastName}/>
+            <Route exact path="/clientes/getClientsSortByRentExpenses" component={GetClientsSortByRentExpenses}/>
+            <Route exact path="/empresas/getCompanyClientsSortByName" component={GetCompanyClientsSortByName}/>
+            <Route exact path="/empresas/getClientsSortByAmount" component={GetClientsSortByAmount}/>
+            <Route exact path="/empresas/getCompaniesSortByProfits" component={GetCompaniesSortByProfits}/>
+            <Route exact path="/empresas/getCompaniesWithRentsOver1Week" component={GetCompaniesWithRentsOver1Week}/>
+            <Route exact path="/empresas/getClientsWithLessExpense" component={GetClientsWithLessExpense}/>
+            <Route exact path="/clientes/newClientRanking" component={NewClientRanking}/>
           </Switch>
           </Router>
             </div> 

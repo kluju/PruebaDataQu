@@ -81,12 +81,170 @@ export const getBusiness = async () => {
   response = await response.json();
   return response;
 }
+export const getBusinessById = async (id) => {
+  let response = await fetch(urlGetBusiness+"/getBusinessById/"+id);
+  response = await response.json();
+  return response;
+}
 
+export const deleteBusiness = async (id) => {
+  
+  
+  let response = await fetch(urlGetBusiness+"/"+id,{headers:getHeader(),method: 'DELETE'  });
+  response = await response.json();
+  return response;
+}
+
+
+export const saveBusiness = async (empresa) => {
+  let formData = new FormData();
+  formData.append("name",empresa.name);
+  var options = {
+    method: 'POST',
+    body: formData,
+    redirect: 'follow'
+  };
+  let response = await fetch(urlGetBusiness, options );
+  return response;
+}
+
+export const updateBusiness = async (empresa) => {
+  let formData = new FormData();
+  
+  formData.append("name",empresa.name);
+  var options = {
+    method: 'POST',
+    body: formData,
+    redirect: 'follow'
+  };
+  let response = await fetch(urlGetBusiness+"/update/"+empresa.id, options );
+  return response;
+}
 export const getLeases = async () => {
   let response = await fetch(urlGetLeases);
   response = await response.json();
   return response;
 }
+export const deleteLeases = async (id) => {
+  
+  
+  let response = await fetch(urlGetLeases+"/"+id,{headers:getHeader(),method: 'DELETE'  });
+  response = await response.json();
+  return response;
+}
+
+export const saveLeases = async (leases) => {
+  let formData = new FormData();
+  
+  formData.append("id_cliente",leases.id_cliente);
+  formData.append("id_empresa",leases.id_empresa);
+  formData.append("costo_diario",leases.costo_diario);
+  formData.append("dias",leases.dias);
+  var options = {
+    method: 'POST',
+    body: formData,
+    redirect: 'follow'
+  };
+  let response = await fetch(urlGetLeases, options );
+  return response;
+}
+
+export const getLeasesById = async (id) => {
+  let response = await fetch(urlGetLeases+"/getLeasesById/"+id);
+  response = await response.json();
+  return response;
+}
+
+export const updateLeases = async (leases) => {
+  let formData = new FormData();
+  
+  formData.append("id_cliente",leases.id_cliente);
+  formData.append("id_empresa",leases.id_empresa);
+  formData.append("costo_diario",leases.costo_diario);
+  formData.append("dias",leases.dias);
+  var options = {
+    method: 'POST',
+    body: formData,
+    redirect: 'follow'
+  };
+  let response = await fetch(urlGetLeases+"/update/"+leases.id, options );
+  return response;
+}
+
+export const getMayorMonto = async () => {
+  let response = await fetch(urlGetLeases+"/mayormonto");
+  response = await response.json();
+  return response;
+}
+
+export const getMenorMonto = async () => {
+  let response = await fetch(urlGetLeases+"/menormonto");
+  response = await response.json();
+  return response;
+}
+
+export const getTotArrPorMes = async () => {
+  let response = await fetch(urlGetLeases+"/pormes");
+  response = await response.json();
+  return response;
+}
+
+export const getClientIdsaAction = async () => {
+  let response = await fetch(urlGetClients+"/getClientIds");
+  response = await response.json();
+  return response;
+} 
+
+export const getClientSortByLastName = async () => {
+  let response = await fetch(urlGetClients+"/getClientSortByLastName");
+  response = await response.json();
+  return response;
+}
+
+export const getClientsSortByRentExpenses = async () => {
+  let response = await fetch(urlGetClients+"/getClientsSortByRentExpenses");
+  response = await response.json();
+  return response;
+}
+
+export const getCompanyClientsSortByName = async () => {
+  let response = await fetch(urlGetBusiness+"/getCompanyClientsSortByName");
+  response = await response.json();
+  return response;
+}
+
+export const getClientsSortByAmount = async (id) => {
+  let response = await fetch(urlGetClients+"/getClientsSortByAmount/"+id);
+  response = await response.json();
+  return response;
+}
+
+export const getCompaniesSortByProfits = async () => {
+  let response = await fetch(urlGetBusiness+"/getCompaniesSortByProfits");
+  response = await response.json();
+  return response;
+}
+
+export const getCompaniesWithRentsOver1Week = async () => {
+  let response = await fetch(urlGetBusiness+"/getCompaniesWithRentsOver1Week");
+  response = await response.json();
+  return response;
+}
+
+export const getClientsWithLessExpense = async () => {
+  let response = await fetch(urlGetBusiness+"/getClientsWithLessExpense");
+  response = await response.json();
+  return response;
+}
+
+export const newClientRanking = async () => {
+  let response = await fetch(urlGetClients+"/newClientRanking");
+  response = await response.json();
+  return response;
+}
+
+
+
 
 export const clients = [
   { 'id': 1, 'rut': '18620855-1', 'name': 'Angel Serrano' },

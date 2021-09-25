@@ -17,6 +17,16 @@ class EmpresaController extends Controller
         $empresas = Empresa::all();
         return $empresas;
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getBusinessById(Request $request)
+    {
+        $empresa = Empresa::findOrFail($request->id);
+        return $empresa;
+    }
 
     
     /**
@@ -79,7 +89,7 @@ class EmpresaController extends Controller
     public function destroy(Request $request)
     {
         $empresa = Empresa::destroy($request->id);
-        return $empresa;
+        return $this->index();
     }
 
 
@@ -95,11 +105,11 @@ class EmpresaController extends Controller
                 
                 select empresas.id id_empresa,empresas.name as nom_empresa , concat_ws(' ', clientes.name, clientes.paterno) as nombre,id_cliente,rut from empresas 
                 inner join arriendos  on empresas.id = arriendos.id_empresa
-                inner join clientes   on clientes.id = arriendos.id_cliente order by nom_empresa
+                inner join clientes   on clientes.id = arriendos.id_cliente order by nom_empresa,nombre
 
         "));
         $salida_empresas = [];
-        foreach ($empresa as $clave => $cliente) {
+        foreach ($empresas as $clave => $empresa) {
             $salida_empresas[$empresa->nom_empresa][]=$empresa->rut;
         }
         
@@ -167,7 +177,8 @@ class EmpresaController extends Controller
             from arriendos 
             inner join clientes on clientes.id = arriendos.id_cliente
             inner join empresas  on empresas.id = arriendos.id_empresa
-            group by  empresa,id_cliente,clientes.name 
+            group by  empresa,id_cliente,clientes.name
+						order by 	 empresa,total_arriendo
             ) empresas_ALL
             group by  empresa
     

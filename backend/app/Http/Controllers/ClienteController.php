@@ -125,8 +125,7 @@ class ClienteController extends Controller
     {
         
         $clientes = DB::select(DB::raw("
-                select id_cliente from clientes 
-                inner join arriendos  on clientes.id = arriendos.id_cliente order by clientes.name
+            select id FROM clientes order by paterno
 
         "));
         return $clientes;

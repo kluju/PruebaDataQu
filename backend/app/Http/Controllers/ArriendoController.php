@@ -21,7 +21,16 @@ class ArriendoController extends Controller
        
         return $salida;
     }
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getLeasesById(Request $request)
+    {
+        $arriendo = Arriendo::findOrFail($request->id);
+        return $arriendo;
+    }
     
     /**
      * Store a newly created resource in storage.
@@ -36,7 +45,13 @@ class ArriendoController extends Controller
         $arriendo->id_empresa = $request->id_empresa;
         $arriendo->costo_diario = $request->costo_diario;
         $arriendo->dias = $request->dias;
-        $arriendo->save();
+        if($arriendo->save()){
+            $salida = array("code"=>"200","mensaje"=>"Guardado satisfactoriamente");
+        }else{
+            $salida = array("code"=>"300","mensaje"=>"No se pudo guardar");
+        }
+        
+        return $salida;
         
     }
 
@@ -89,7 +104,7 @@ class ArriendoController extends Controller
     public function destroy(Request $request)
     {
         $arriendo = Arriendo::destroy($request->id);
-        return $arriendo;
+        return $this->index();
     }
     
     /**
@@ -99,15 +114,11 @@ class ArriendoController extends Controller
      */
     public function arriendoPorMes()
     {
-        $arriendos = DB::table('arriendos')->get();//->where('estado', 0)->pluck('id_proceso')->first();
-        $arriendosMax = DB::select(DB::raw(
-            "select id_cliente,  sum(costo_diario * dias) suma from arriendos group by id_cliente order by suma desc limit 1")
+        
+        $salida = DB::select(DB::raw(
+            "select count(*) as total from arriendos")
         );
-        $arriendosMin = DB::select(DB::raw(
-            "select id_cliente,  sum(costo_diario * dias) suma from arriendos group by id_cliente order by suma asc limit 1")
-        );
-        $salida["cli_mayor_monto"] = $arriendosMax; 
-        $salida["cli_menor_monto"] = $arriendosMin; 
+        
         return $salida;
     }
 
@@ -120,7 +131,7 @@ class ArriendoController extends Controller
     {
         $arriendos = DB::table('arriendos')->get();//->where('estado', 0)->pluck('id_proceso')->first();
         $salida = DB::select(DB::raw(
-            "select id_cliente,clientes.name as nombre, sum(costo_diario * dias) suma from arriendos inner join clientes on clientes.id = arriendos.id_cliente group by id_cliente,clientes.name order by suma desc limit 1")
+            "select id_cliente,clientes.name as nombre,clientes.paterno as apellido,sum(costo_diario * dias) suma from arriendos inner join clientes on clientes.id = arriendos.id_cliente group by id_cliente,clientes.name order by suma desc limit 1")
         );
        
         return $salida;
@@ -136,7 +147,7 @@ class ArriendoController extends Controller
     {
         $arriendos = DB::table('arriendos')->get();//->where('estado', 0)->pluck('id_proceso')->first();
         $salida = DB::select(DB::raw(
-            "select id_cliente,clientes.name as nombre, sum(costo_diario * dias) suma from arriendos inner join clientes on clientes.id = arriendos.id_cliente group by id_cliente,clientes.name order by suma asc limit 1")
+            "select id_cliente,clientes.name as nombre,clientes.paterno as apellido, sum(costo_diario * dias) suma from arriendos inner join clientes on clientes.id = arriendos.id_cliente group by id_cliente,clientes.name order by suma asc limit 1")
         );
         
         

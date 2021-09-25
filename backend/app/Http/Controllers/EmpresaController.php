@@ -191,4 +191,29 @@ class EmpresaController extends Controller
         
         return $salida_empresa;
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function resumenArriendo()
+    {
+        
+        $empresas = DB::select(DB::raw("
+                select id_empresa,empresas.name as nom_empresa,id_cliente,concat_ws(' ', clientes.name, clientes.paterno) as nombre ,count(*) total_arriendos from arriendos
+                inner join clientes on clientes.id = arriendos.id_cliente
+                inner join empresas  on empresas.id = arriendos.id_empresa 
+                GROUP BY id_empresa,id_cliente
+                order by id_empresa,id_cliente
+        "));
+        $salida_empresas = [];
+        foreach ($empresas as $clave => $empresa) {
+            $salida_empresas[$empresa->id_empresa]["nombre"]= $empresa->nom_empresa;
+            $salida_empresas[$empresa->id_empresa]["id_empresa"]= $empresa->id_empresa;
+            $salida_empresas[$empresa->id_empresa]["clientes"][$empresa->id_cliente] = array("id_cliente"=>$empresa->id_cliente,"nombre"=>$empresa->nombre,"total_arriendos"=>$empresa->total_arriendos);
+        }
+        
+        return $salida_empresas;
+    }
 }

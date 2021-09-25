@@ -35,6 +35,7 @@ Route::get('/empresas/getBusinessById/{id}','App\Http\Controllers\EmpresaControl
 Route::post('/empresas','App\Http\Controllers\EmpresaController@store');
 Route::post('/empresas/update/{id}','App\Http\Controllers\EmpresaController@update');
 Route::delete('/empresas/{id}','App\Http\Controllers\EmpresaController@destroy');
+Route::get('/empresas/resumenArriendo','App\Http\Controllers\EmpresaController@resumenArriendo');
 
 Route::get('/empresas/getCompanyClientsSortByName','App\Http\Controllers\EmpresaController@getCompanyClientsSortByName');
 Route::get('/empresas/getCompaniesSortByProfits','App\Http\Controllers\EmpresaController@getCompaniesSortByProfits');

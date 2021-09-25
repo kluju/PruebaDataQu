@@ -242,7 +242,11 @@ export const newClientRanking = async () => {
   response = await response.json();
   return response;
 }
-
+export const getResumen = async () => {
+  let response = await fetch(urlGetBusiness+"/resumenArriendo");
+  response = await response.json();
+  return response;
+}
 
 
 

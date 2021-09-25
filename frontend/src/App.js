@@ -14,9 +14,8 @@ import {
 import {Clientes,ClientesADD, ClientesUPDATE}from './Views/Clientes';
 import {Empresas,EmpresasADD, EmpresasUPDATE} from './Views/Empresas';
 import {Arriendos,ArriendosADD, ArriendosUPDATE} from './Views/Arriendos';
-
 import  {GetClientIds,GetClientSortByLastName,GetClientsSortByRentExpenses,GetCompanyClientsSortByName,GetClientsSortByAmount,GetCompaniesSortByProfits,GetCompaniesWithRentsOver1Week,GetClientsWithLessExpense,NewClientRanking } from './Views/Funciones';
-
+import {Grafico}from './Views/Grafico';
 const App = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -35,6 +34,7 @@ const App = () => {
                 <Link className="p-2 text-dark" to="/">Clientes</Link>
                 <Link className="p-2 text-dark" to="/empresas">Empresas</Link>
                 <Link className="p-2 text-dark" to="/arriendos">Arriendos</Link>
+                <Link className="p-2 text-dark" to="/grafico">Grafico de arriendos</Link>
               </nav>
               <Dropdown isOpen={dropdownOpen} toggle={toggle}>
                 <DropdownToggle caret>
@@ -51,6 +51,7 @@ const App = () => {
                   <Link className="p-2 text-dark" to="/empresas/getCompaniesWithRentsOver1Week"><DropdownItem>CompaniesWithRentsOver1Week</DropdownItem></Link>
                   <Link className="p-2 text-dark" to="/empresas/getClientsWithLessExpense"><DropdownItem>ClientsWithLessExpense</DropdownItem></Link>
                   <Link className="p-2 text-dark" to="/clientes/newClientRanking"><DropdownItem>NewClientRanking</DropdownItem></Link>
+                  
                 </DropdownMenu>
               </Dropdown>
             </div>
@@ -86,6 +87,7 @@ const App = () => {
             <Route exact path="/empresas/getCompaniesWithRentsOver1Week" component={GetCompaniesWithRentsOver1Week}/>
             <Route exact path="/empresas/getClientsWithLessExpense" component={GetClientsWithLessExpense}/>
             <Route exact path="/clientes/newClientRanking" component={NewClientRanking}/>
+            <Route exact path="/grafico" component={Grafico}/>
           </Switch>
           </Router>
             </div> 

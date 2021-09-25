@@ -4,7 +4,7 @@ import { JsonToTable } from "react-json-to-table";
 import 'bootstrap/dist/css/bootstrap.css';
 import {  getClientIds, getClients,getBusiness,getLeases } from './api';
 import React from "react";
-import { Button, Alert, Table, Card, CardHeader, Modal, ModalHeader, ModalBody, ModalFooter,  CardBody, Container, Row, Col,Spinner ,} from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,7 +18,9 @@ import {Arriendos,ArriendosADD, ArriendosUPDATE} from './Views/Arriendos';
 import  {GetClientIds,GetClientSortByLastName,GetClientsSortByRentExpenses,GetCompanyClientsSortByName,GetClientsSortByAmount,GetCompaniesSortByProfits,GetCompaniesWithRentsOver1Week,GetClientsWithLessExpense,NewClientRanking } from './Views/Funciones';
 
 const App = () => {
-  
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen(prevState => !prevState);
   const [clientIds, setClientIds] = useState([]);
   const [clients, setClients] = useState([]);
   const handleGetClientIds = async () => setClientIds(await getClientIds())
@@ -33,17 +35,24 @@ const App = () => {
                 <Link className="p-2 text-dark" to="/">Clientes</Link>
                 <Link className="p-2 text-dark" to="/empresas">Empresas</Link>
                 <Link className="p-2 text-dark" to="/arriendos">Arriendos</Link>
-                <Link className="p-2 text-dark" to="/clientes/getClientIds">ClientIds</Link>
-                <Link className="p-2 text-dark" to="/clientes/getClientSortByLastName">ClientSortByLastName</Link>
-                <Link className="p-2 text-dark" to="/clientes/getClientsSortByRentExpenses">ClientsSortByRentExpenses</Link>
-                <Link className="p-2 text-dark" to="/empresas/getCompanyClientsSortByName">CompanyClientsSortByName</Link>
-                <Link className="p-2 text-dark" to="/empresas/getClientsSortByAmount">ClientsSortByAmount</Link>
-                <Link className="p-2 text-dark" to="/empresas/getCompaniesSortByProfits">CompaniesSortByProfits</Link>
-                <Link className="p-2 text-dark" to="/empresas/getCompaniesWithRentsOver1Week">CompaniesWithRentsOver1Week</Link>
-                <Link className="p-2 text-dark" to="/empresas/getClientsWithLessExpense">ClientsWithLessExpense</Link>
-                <Link className="p-2 text-dark" to="/clientes/newClientRanking">NewClientRanking</Link>
               </nav>
-              
+              <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                <DropdownToggle caret>
+                  Funciones
+                </DropdownToggle>
+                <DropdownMenu>
+                  
+                  <Link className="p-2 text-dark" to="/clientes/getClientIds"><DropdownItem>ClientIds</DropdownItem></Link>
+                  <Link className="p-2 text-dark" to="/clientes/getClientSortByLastName"><DropdownItem>ClientSortByLastName</DropdownItem></Link>
+                  <Link className="p-2 text-dark" to="/clientes/getClientsSortByRentExpenses"><DropdownItem>ClientsSortByRentExpenses</DropdownItem></Link>
+                  <Link className="p-2 text-dark" to="/empresas/getCompanyClientsSortByName"><DropdownItem>CompanyClientsSortByName</DropdownItem></Link>
+                  <Link className="p-2 text-dark" to="/empresas/getClientsSortByAmount"><DropdownItem>ClientsSortByAmount</DropdownItem></Link>
+                  <Link className="p-2 text-dark" to="/empresas/getCompaniesSortByProfits"><DropdownItem>CompaniesSortByProfits</DropdownItem></Link>
+                  <Link className="p-2 text-dark" to="/empresas/getCompaniesWithRentsOver1Week"><DropdownItem>CompaniesWithRentsOver1Week</DropdownItem></Link>
+                  <Link className="p-2 text-dark" to="/empresas/getClientsWithLessExpense"><DropdownItem>ClientsWithLessExpense</DropdownItem></Link>
+                  <Link className="p-2 text-dark" to="/clientes/newClientRanking"><DropdownItem>NewClientRanking</DropdownItem></Link>
+                </DropdownMenu>
+              </Dropdown>
             </div>
             <Switch>
             <Route exact path="/">
